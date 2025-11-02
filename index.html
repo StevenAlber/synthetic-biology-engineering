@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthetic Biology: Engineering Life</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+            color: #003366;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+        .lang-btn {
+            @apply px-3 py-1 rounded-md text-sm font-semibold transition-colors cursor-pointer;
+        }
+        .lang-btn.active {
+            @apply bg-[#003366] text-white;
+        }
+        .lang-btn.inactive {
+            @apply text-[#004E9A] hover:bg-gray-200;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="max-w-7xl mx-auto px-4 sm:px-8 pt-6 flex justify-end">
+        <div id="lang-switcher" class="flex space-x-2 p-1 bg-white rounded-lg shadow">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn inactive" data-lang="ru">RU</button>
+            <button class="lang-btn inactive" data-lang="jp">JP</button>
+        </div>
+    </nav>
+
+    <header class="pt-8 pb-12 md:pt-12 md:pb-16 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#003366]" data-key="mainTitle">Synthetic Biology: Engineering Life</h1>
+            <p class="mt-4 text-lg md:text-xl text-[#004E9A]" data-key="mainSubtitle">
+                An analysis of the field's evolution from classical biology to an engineering discipline, exploring its core technologies, foundational milestones, and philosophical frontiers.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-4 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
+        <section class="md:col-span-2 bg-white rounded-xl shadow-lg overflow-hidden p-6 md:p-8">
+            <h2 class="text-3xl font-bold text-[#003366] mb-6" data-key="section1Title">The Evolution of an Engineering Discipline</h2>
+            <p class="text-base text-[#004E9A] mb-8 max-w-4xl" data-key="section1Text">
+                Synthetic biology designs and constructs biological systems with defined properties, including those not found in nature. What began as theoretical biology (1970s) and early genetic engineering (1980s-90s) has now matured into a full-fledged engineering discipline, driven by milestones like the first synthetic genome in 2010.
+            </p>
+            <div class="relative pl-8 border-l-4 border-[#007BFF]">
+                
+                <div class="mb-10 relative">
+                    <div class="absolute w-5 h-5 bg-[#007BFF] rounded-full -left-[1.45rem] top-1 border-4 border-white"></div>
+                    <h3 class="text-xl font-semibold text-[#004E9A]" data-key="timeline1Title">Classical Biology (1859–1955)</h3>
+                    <p class="text-sm text-[#003366] mt-1" data-key="timeline1Text">Darwin (Evolution), Mendel (Heredity), Watson & Crick (DNA Structure), Sanger (First Protein Sequence).</p>
+                </div>
+                
+                <div class="mb-10 relative">
+                    <div class="absolute w-5 h-5 bg-[#007BFF] rounded-full -left-[1.45rem] top-1 border-4 border-white"></div>
+                    <h3 class="text-xl font-semibold text-[#004E9A]" data-key="timeline2Title">Molecular Biology (1957–1992)</h3>
+                    <p class="text-sm text-[#003366] mt-1" data-key="timeline2Text">In vitro DNA synthesis, Operon Model, Restriction Enzymes, DNA Sequencing, PCR, Flux Balance Theory.</p>
+                </div>
+                
+                <div class="relative">
+                    <div class="absolute w-5 h-5 bg-[#007BFF] rounded-full -left-[1.45rem] top-1 border-4 border-white"></div>
+                    <h3 class="text-xl font-semibold text-[#004E9A]" data-key="timeline3Title">Synthetic & Genomic Biology (1995–2019)</h3>
+                    <p class="text-sm text-[#003366] mt-1" data-key="timeline3Text">First bacterial genomes, RNA-Seq & CRISPR, First Synthetic Cell (2010), Minimal Synthetic Cell (2016), Biology recognized as an Engineering Discipline (2019).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-lg p-6 md:p-8 flex flex-col">
+            <h2 class="text-3xl font-bold text-[#003366] mb-4" data-key="section2Title">The Quest for the Minimal Cell</h2>
+            <p class="text-base text-[#004E9A] mb-6" data-key="section2Text">
+                A primary goal of synthetic biology is to understand the fundamental components of life by building a "minimal cell." This involves systematically reducing a genome to only the genes essential for life.
+            </p>
+            <h3 class="text-xl font-semibold text-[#004E9A] text-center mb-2" data-key="chart1Title">JCVI-syn3.0: A Minimal Genome (2016)</h3>
+            <div class="chart-container flex-grow">
+                <canvas id="minimalCellChart"></canvas>
+            </div>
+            <p class="text-sm text-[#004E9A] mt-6" data-key="chart1Text">
+                The 2016 minimal cell, JCVI-syn3.0, contains 473 genes. Critically, 149 of these genes—over 31%—have functions that remain unknown, highlighting how much we still have to learn about the basic operations of life.
+            </p>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-lg p-6 md:p-8 flex flex-col">
+            <h2 class="text-3xl font-bold text-[#003366] mb-4" data-key="section3Title">Milestones in Genome Synthesis</h2>
+            <p class="text-base text-[#004E9A] mb-6" data-key="section3Text">
+                The creation of a minimal cell was the culmination of decades of work, starting with the first fully synthetic genome, JCVI-syn1.0. This 15-year, $40 million project proved that genomes could be designed and built from scratch.
+            </p>
+            <h3 class="text-xl font-semibold text-[#004E9A] text-center mb-2" data-key="chart2Title">Genome Reduction Series (kbp)</h3>
+            <div class="chart-container flex-grow">
+                <canvas id="genomeReductionChart"></canvas>
+            </div>
+            <p class="text-sm text-[#004E9A] mt-6" data-key="chart2Text">
+                This chart shows the radical reduction in genome size from the natural *M. mycoides* donor (1,083 kbp) to the minimized JCVI-syn2.0 (576 kbp) and the subsequent minimal cell JCVI-syn3.0 (531 kbp).
+            </p>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <h2 class="text-3xl font-bold text-[#003366] mb-4" data-key="section4Title">Expanding the Biological Alphabet: Artificial Enzymes</h2>
+            <p class="text-base text-[#004E9A] mb-6" data-key="section4Text">
+                Beyond minimizing life, scientists are actively expanding its toolkit. By incorporating unnatural amino acids (nnAAs), enzymes can be engineered with enhanced activity, stability, and selectivity, or even to perform new-to-nature catalytic reactions.
+            </p>
+            <h3 class="text-xl font-semibold text-[#004E9A] mb-4" data-key="section4ListTitle">Key Development Approaches:</h3>
+            <ul class="list-disc list-inside space-y-2 text-[#003366]">
+                <li data-key="section4Li1">Computational design of modified and chimeric enzyme models.</li>
+                <li data-key="section4Li2">Directed-evolution platforms to study enzyme function *in vitro* and *in vivo*.</li>
+                <li data-key="section4Li3">*In vitro* systems for obtaining enzymes with an expanded amino-acid composition.</li>
+                <li data-key="section4Li4">Enzyme engineering for enhanced stability and reducing side reactions.</li>
+            </ul>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <h2 class="text-3xl font-bold text-[#003366] mb-4" data-key="section5Title">Expanding the Biological Alphabet: Unnatural Nucleotides</h2>
+            <p class="text-base text-[#004E9A] mb-6" data-key="section5Text">
+                The genetic code itself is being expanded. In 1989, Steven Benner's group created a 6-letter DNA (adding 'P' and 'Z' nucleotides). While 4-letter DNA encodes 20 amino acids, this 6-letter system could theoretically encode up to 10 times more.
+            </p>
+            <h3 class="text-xl font-semibold text-[#004E9A] mb-4" data-key="section5ListTitle">XNA Modification Types:</h3>
+            <div class="flex flex-col md:flex-row gap-4 mt-4 text-center">
+                <div class="flex-1 p-4 bg-[#B8DFFF] rounded-lg text-[#003366] font-semibold" data-key="section5Box1">
+                    (A) Base Modifications
+                </div>
+                <div class="flex-1 p-4 bg-[#B8DFFF] rounded-lg text-[#003366] font-semibold" data-key="section5Box2">
+                    (B) Sugar Modifications
+                </div>
+                <div class="flex-1 p-4 bg-[#B8DFFF] rounded-lg text-[#003366] font-semibold" data-key="section5Box3">
+                    (C) Phosphate Modifications
+                </div>
+            </div>
+        </section>
+        
+        <section class="md:col-span-2 bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <h2 class="text-3xl font-bold text-[#003366] mb-4" data-key="section6Title">The Engineer's Toolkit: Methods & Workflow</h2>
+            <p class="text-base text-[#004E9A] mb-6" data-key="section6Text">
+                A suite of powerful techniques enables the precise and rapid engineering of genomes. These methods are part of a high-throughput workflow that has industrialized the process of DNA synthesis and assembly.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-[#004E9A] mb-4" data-key="section6List1Title">Advanced Engineering Techniques:</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                            <span class="font-bold text-[#004E9A]" data-key="section6Tech1Name">MAGE:</span>
+                            <span class="text-sm text-[#003366]" data-key="section6Tech1Desc"> Multiplex Automated Genome Engineering for iterative oligo recombination.</span>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                            <span class="font-bold text-[#004E9A]" data-key="section6Tech2Name">ICE:</span>
+                            <span class="text-sm text-[#003366]" data-key="section6Tech2Desc"> *In vivo* Continuous Evolution via reverse transcription and reintegration.</span>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                            <span class="font-bold text-[#004E9A]" data-key="section6Tech3Name">EvolvR:</span>
+                            <span class="text-sm text-[#003366]" data-key="section6Tech3Desc"> nCas9-fused DNA polymerase for error-prone strand synthesis.</span>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                            <span class="font-bold text-[#004E9A]" data-key="section6Tech4Name">SCRaMbLE:</span>
+                            <span class="text-sm text-[#003366]" data-key="section6Tech4Desc"> Recombination system enabling vast phenotype diversity.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold text-[#004E9A] mb-4" data-key="section6List2Title">High-Throughput DNA Assembly Workflow:</h3>
+                    <div class="flex flex-col space-y-4">
+                        <div class="p-4 bg-white border-2 border-[#007BFF] rounded-lg text-center shadow-sm">
+                            <span class="font-semibold text-lg text-[#003366]" data-key="section6Flow1Title">1. Software Design</span>
+                            <p class="text-sm text-[#004E9A]" data-key="section6Flow1Desc">Design of synthetic sequences and fragment schemes.</p>
+                        </div>
+                        <div class="self-center text-3xl font-bold text-[#007BFF] transform rotate-90 md:rotate-0">↓</div>
+                        <div class="p-4 bg-white border-2 border-[#007BFF] rounded-lg text-center shadow-sm">
+                            <span class="font-semibold text-lg text-[#003366]" data-key="section6Flow2Title">2. Oligonucleotide Synthesis</span>
+                            <p class="text-sm text-[#004E9A]" data-key="section6Flow2Desc">Assembly from synthetic oligos using LCR and PCR.</p>
+                        </div>
+                        <div class="self-center text-3xl font-bold text-[#007BFF] transform rotate-90 md:rotate-0">↓</div>
+                        <div class="p-4 bg-white border-2 border-[#007BFF] rounded-lg text-center shadow-sm">
+                            <span class="font-semibold text-lg text-[#003366]" data-key="section6Flow3Title">3. Sequencing & Error Correction</span>
+                            <p class="text-sm text-[#004E9A]" data-key="section6Flow3Desc">Sanger and nanopore methods; enzymatic correction.</p>
+                        </div>
+                        <div class="self-center text-3xl font-bold text-[#007BFF] transform rotate-90 md:rotate-0">↓</div>
+                        <div class="p-4 bg-white border-2 border-[#007BFF] rounded-lg text-center shadow-sm">
+                            <span class="font-semibold text-lg text-[#003366]" data-key="section6Flow4Title">4. Fragment Assembly</span>
+                            <p class="text-sm text-[#004E9A]" data-key="section6Flow4Desc">Assembly of 1kb to 100kb+ fragments in *E. coli* or yeast.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <h2 class="text-3xl font-bold text-[#003366] mb-4" data-key="section7Title">The Next Frontier: BioAI</h2>
+            <p class="text-base text-[#004E9A] mb-6" data-key="section7Text">
+                The convergence of artificial intelligence and synthetic biology is creating "BioAI." AI can decode life's complexity at a scale beyond human cognition, enabling the design and prediction of gene networks, proteins, and metabolic pathways with unprecedented precision.
+            </p>
+            <div class="flex flex-col items-center justify-center gap-4 text-center mt-6">
+                <div class="p-4 rounded-lg bg-[#B8DFFF] w-full">
+                    <span class="font-bold text-lg text-[#003366]" data-key="section7Box1Title">Synthetic Biology</span>
+                    <p class="text-sm text-[#004E9A]" data-key="section7Box1Desc">Constructs Biological Systems</p>
+                </div>
+                <span class="text-4xl font-bold text-[#007BFF]">+</span>
+                <div class="p-4 rounded-lg bg-[#B8DFFF] w-full">
+                    <span class="font-bold text-lg text-[#003366]" data-key="section7Box2Title">Artificial Intelligence</span>
+                    <p class="text-sm text-[#004E9A]" data-key="section7Box2Desc">Decodes Complexity</p>
+                </div>
+                <span class="text-4xl font-bold text-[#007BFF]">=</span>
+                <div class="p-5 rounded-lg bg-[#004E9A] text-white w-full shadow-lg">
+                    <span class="font-bold text-xl" data-key="section7Box3Title">BioAI</span>
+                    <p class="text-sm text-gray-200" data-key="section7Box3Desc">Intelligent Engineering of Life</p>
+                </div>
+            </div>
+            <p class="text-sm text-[#004E9A] mt-6 italic text-center" data-key="section7Quote">
+                "When life becomes computable, intelligence becomes biological."
+            </p>
+        </section>
+        
+        <section class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <h2 class="text-3xl font-bold text-[#003366] mb-4" data-key="section8Title">The Philosophical Dimension</h2>
+            <p class="text-base text-[#004E9A] mb-6" data-key="section8Text">
+                This engineering power forces humanity to confront deep philosophical questions about the nature of life and morality. The field integrates biology and neuroscience with philosophy to explore whether our sense of right and wrong is an evolutionary adaptation or a rational construct.
+            </p>
+            <h3 class="text-xl font-semibold text-[#004E9A] mb-4" data-key="section8ListTitle">Key Figures & Questions:</h3>
+            <ul class="list-none space-y-4 text-[#003366]">
+                <li class="flex items-start">
+                    <span class="text-[#007BFF] font-bold text-2xl mr-3 mt-[-4px]">?</span>
+                    <span data-key="section8Li1">Is altruism a form of sophisticated egoism?</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-[#007BFF] font-bold text-2xl mr-3 mt-[-4px]">?</span>
+                    <span data-key="section8Li2">Does self-limitation exist in human destructiveness?</span>
+                </li>
+            </ul>
+            <div class="mt-6 border-t border-gray-200 pt-6 space-y-3">
+                <p class="text-sm text-[#003366]">
+                    <span class="font-semibold text-[#004E9A]" data-key="section8Fig1">Vladimir Efroimson:</span>
+                    <span data-key="section8Fig1Desc"> Pioneer of genetic approaches to ethics and behavior.</span>
+                </p>
+                <p class="text-sm text-[#003366]">
+                    <span class="font-semibold text-[#004E9A]" data-key="section8Fig2">Immanuel Kant:</span>
+                    <span data-key="section8Fig2Desc"> Philosopher of moral law and the categorical imperative.</span>
+                </p>
+                <p class="text-sm text-[#003366]">
+                    <span class="font-semibold text-[#004E9A]" data-key="section8Fig3">Marc Hauser:</span>
+                    <span data-key="section8Fig3Desc"> Explored moral minds as a universal, evolved sense.</span>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-10 mt-8">
+        <p class="text-sm text-gray-500" data-key="footerText1">
+            Infographic based on "SYNTHETIC BIOLOGY — ENGLISH PRESENTATION SET".
+        </p>
+        <p class="text-sm text-[#003366] font-semibold mt-2" data-key="footerText2">
+            Raif Gayanovich Vasilov — National Research Center “Kurchatov Institute”, Russia
+        </p>
+        <p class="text-xs text-gray-400 mt-1" data-key="footerText3">2 November 2025</p>
+    </footer>
+
+    <script>
+        const translations = {
+            'en': {
+                mainTitle: 'Synthetic Biology: Engineering Life',
+                mainSubtitle: "An analysis of the field's evolution from classical biology to an engineering discipline, exploring its core technologies, foundational milestones, and philosophical frontiers.",
+                section1Title: 'The Evolution of an Engineering Discipline',
+                section1Text: 'Synthetic biology designs and constructs biological systems with defined properties, including those not found in nature. What began as theoretical biology (1970s) and early genetic engineering (1980s-90s) has now matured into a full-fledged engineering discipline, driven by milestones like the first synthetic genome in 2010.',
+                timeline1Title: 'Classical Biology (1859–1955)',
+                timeline1Text: 'Darwin (Evolution), Mendel (Heredity), Watson & Crick (DNA Structure), Sanger (First Protein Sequence).',
+                timeline2Title: 'Molecular Biology (1957–1992)',
+                timeline2Text: 'In vitro DNA synthesis, Operon Model, Restriction Enzymes, DNA Sequencing, PCR, Flux Balance Theory.',
+                timeline3Title: 'Synthetic & Genomic Biology (1995–2019)',
+                timeline3Text: 'First bacterial genomes, RNA-Seq & CRISPR, First Synthetic Cell (2010), Minimal Synthetic Cell (2016), Biology recognized as an Engineering Discipline (2019).',
+                section2Title: 'The Quest for the Minimal Cell',
+                section2Text: 'A primary goal of synthetic biology is to understand the fundamental components of life by building a "minimal cell." This involves systematically reducing a genome to only the genes essential for life.',
+                chart1Title: 'JCVI-syn3.0: A Minimal Genome (2016)',
+                chart1Label1: 'Known Function (324)',
+                chart1Label2: 'Unknown Function (149)',
+                chart1Text: 'The 2016 minimal cell, JCVI-syn3.0, contains 473 genes. Critically, 149 of these genes—over 31%—have functions that remain unknown, highlighting how much we still have to learn about the basic operations of life.',
+                section3Title: 'Milestones in Genome Synthesis',
+                section3Text: 'The creation of a minimal cell was the culmination of decades of work, starting with the first fully synthetic genome, JCVI-syn1.0. This 15-year, $40 million project proved that genomes could be designed and built from scratch.',
+                chart2Title: 'Genome Reduction Series (kbp)',
+                chart2Label1: 'M. mycoides (Natural Donor)',
+                chart2Label2: 'JCVI-syn2.0',
+                chart2Label3: 'JCVI-syn3.0 (Minimal)',
+                chart2DatasetLabel: 'Genome Size (kbp)',
+                chart2Text: 'This chart shows the radical reduction in genome size from the natural *M. mycoides* donor (1,083 kbp) to the minimized JCVI-syn2.0 (576 kbp) and the subsequent minimal cell JCVI-syn3.0 (531 kbp).',
+                section4Title: 'Expanding the Biological Alphabet: Artificial Enzymes',
+                section4Text: 'Beyond minimizing life, scientists are actively expanding its toolkit. By incorporating unnatural amino acids (nnAAs), enzymes can be engineered with enhanced activity, stability, and selectivity, or even to perform new-to-nature catalytic reactions.',
+                section4ListTitle: 'Key Development Approaches:',
+                section4Li1: 'Computational design of modified and chimeric enzyme models.',
+                section4Li2: 'Directed-evolution platforms to study enzyme function *in vitro* and *in vivo*.',
+                section4Li3: '*In vitro* systems for obtaining enzymes with an expanded amino-acid composition.',
+                section4Li4: 'Enzyme engineering for enhanced stability and reducing side reactions.',
+                section5Title: 'Expanding the Biological Alphabet: Unnatural Nucleotides',
+                section5Text: "The genetic code itself is being expanded. In 1989, Steven Benner's group created a 6-letter DNA (adding 'P' and 'Z' nucleotides). While 4-letter DNA encodes 20 amino acids, this 6-letter system could theoretically encode up to 10 times more.",
+                section5ListTitle: 'XNA Modification Types:',
+                section5Box1: '(A) Base Modifications',
+                section5Box2: '(B) Sugar Modifications',
+                section5Box3: '(C) Phosphate Modifications',
+                section6Title: "The Engineer's Toolkit: Methods & Workflow",
+                section6Text: 'A suite of powerful techniques enables the precise and rapid engineering of genomes. These methods are part of a high-throughput workflow that has industrialized the process of DNA synthesis and assembly.',
+                section6List1Title: 'Advanced Engineering Techniques:',
+                section6Tech1Name: 'MAGE:',
+                section6Tech1Desc: ' Multiplex Automated Genome Engineering for iterative oligo recombination.',
+                section6Tech2Name: 'ICE:',
+                section6Tech2Desc: ' *In vivo* Continuous Evolution via reverse transcription and reintegration.',
+                section6Tech3Name: 'EvolvR:',
+                section6Tech3Desc: ' nCas9-fused DNA polymerase for error-prone strand synthesis.',
+                section6Tech4Name: 'SCRaMbLE:',
+                section6Tech4Desc: ' Recombination system enabling vast phenotype diversity.',
+                section6List2Title: 'High-Throughput DNA Assembly Workflow:',
+                section6Flow1Title: '1. Software Design',
+                section6Flow1Desc: 'Design of synthetic sequences and fragment schemes.',
+                section6Flow2Title: '2. Oligonucleotide Synthesis',
+                section6Flow2Desc: 'Assembly from synthetic oligos using LCR and PCR.',
+                section6Flow3Title: '3. Sequencing & Error Correction',
+                section6Flow3Desc: 'Sanger and nanopore methods; enzymatic correction.',
+                section6Flow4Title: '4. Fragment Assembly',
+                section6Flow4Desc: 'Assembly of 1kb to 100kb+ fragments in *E. coli* or yeast.',
+                section7Title: 'The Next Frontier: BioAI',
+                section7Text: 'The convergence of artificial intelligence and synthetic biology is creating "BioAI." AI can decode life\'s complexity at a scale beyond human cognition, enabling the design and prediction of gene networks, proteins, and metabolic pathways with unprecedented precision.',
+                section7Box1Title: 'Synthetic Biology',
+                section7Box1Desc: 'Constructs Biological Systems',
+                section7Box2Title: 'Artificial Intelligence',
+                section7Box2Desc: 'Decodes Complexity',
+                section7Box3Title: 'BioAI',
+                section7Box3Desc: 'Intelligent Engineering of Life',
+                section7Quote: '"When life becomes computable, intelligence becomes biological."',
+                section8Title: 'The Philosophical Dimension',
+                section8Text: 'This engineering power forces humanity to confront deep philosophical questions about the nature of life and morality. The field integrates biology and neuroscience with philosophy to explore whether our sense of right and wrong is an evolutionary adaptation or a rational construct.',
+                section8ListTitle: 'Key Figures & Questions:',
+                section8Li1: 'Is altruism a form of sophisticated egoism?',
+                section8Li2: 'Does self-limitation exist in human destructiveness?',
+                section8Fig1: 'Vladimir Efroimson:',
+                section8Fig1Desc: ' Pioneer of genetic approaches to ethics and behavior.',
+                section8Fig2: 'Immanuel Kant:',
+                section8Fig2Desc: ' Philosopher of moral law and the categorical imperative.',
+                section8Fig3: 'Marc Hauser:',
+                section8Fig3Desc: ' Explored moral minds as a universal, evolved sense.',
+                footerText1: 'Infographic based on "SYNTHETIC BIOLOGY — ENGLISH PRESENTATION SET".',
+                footerText2: 'Raif Gayanovich Vasilov — National Research Center “Kurchatov Institute”, Russia',
+                footerText3: '2 November 2025'
+            },
+            'ru': {
+                mainTitle: 'Синтетическая биология: Инженерия жизни',
+                mainSubtitle: 'Анализ эволюции области от классической биологии до инженерной дисциплины, изучение ее основных технологий, фундаментальных этапов и философских границ.',
+                section1Title: 'Эволюция инженерной дисциплины',
+                section1Text: 'Синтетическая биология занимается дизайном и созданием биологических систем с заданными свойствами, в том числе не существующих в природе. То, что начиналось как теоретическая биология (1970-е) и ранняя генная инженерия (1980-90-е), теперь превратилось в полноценную инженерную дисциплину, движимую такими вехами, как первый синтетический геном в 2010 году.',
+                timeline1Title: 'Классическая биология (1859–1955)',
+                timeline1Text: 'Дарвин (Эволюция), Мендель (Наследственность), Уотсон и Крик (Структура ДНК), Сэнгер (Первая последовательность белка).',
+                timeline2Title: 'Молекулярная биология (1957–1992)',
+                timeline2Text: 'Синтез ДНК in vitro, Модель оперона, Рестрикционные ферменты, Секвенирование ДНК, ПЦР, Теория баланса потоков.',
+                timeline3Title: 'Синтетическая и геномная биология (1995–2019)',
+                timeline3Text: 'Первые бактериальные геномы, RNA-Seq и CRISPR, Первая синтетическая клетка (2010), Минимальная синтетическая клетка (2016), Биология признана инженерной дисциплиной (2019).',
+                section2Title: 'В поисках минимальной клетки',
+                section2Text: 'Основная цель синтетической биологии — понять фундаментальные компоненты жизни путем создания "минимальной клетки". Это включает систематическое сокращение генома до только тех генов, которые необходимы для жизни.',
+                chart1Title: 'JCVI-syn3.0: Минимальный геном (2016)',
+                chart1Label1: 'Известная функция (324)',
+                chart1Label2: 'Неизвестная функция (149)',
+                chart1Text: 'Минимальная клетка 2016 года, JCVI-syn3.0, содержит 473 гена. Критически важно, что 149 из этих генов — более 31% — имеют неизвестные функции, что подчеркивает, как много нам еще предстоит узнать об основных операциях жизни.',
+                section3Title: 'Вехи в синтезе генома',
+                section3Text: 'Создание минимальной клетки стало кульминацией десятилетий работы, начиная с первого полностью синтетического генома, JCVI-syn1.0. Этот 15-летний проект стоимостью 40 миллионов долларов доказал, что геномы можно проектировать и создавать с нуля.',
+                chart2Title: 'Серия редукции генома (kbp)',
+                chart2Label1: 'M. mycoides (Природный донор)',
+                chart2Label2: 'JCVI-syn2.0',
+                chart2Label3: 'JCVI-syn3.0 (Минимальный)',
+                chart2DatasetLabel: 'Размер генома (kbp)',
+                chart2Text: 'Этот график показывает радикальное уменьшение размера генома от природного донора *M. mycoides* (1083 kbp) до минимизированного JCVI-syn2.0 (576 kbp) и последующей минимальной клетки JCVI-syn3.0 (531 kbp).',
+                section4Title: 'Расширение биологического алфавита: Искусственные ферменты',
+                section4Text: 'Помимо минимизации жизни, ученые активно расширяют ее инструментарий. Путем включения неприродных аминокислот (nnAAs) можно создавать ферменты с улучшенной активностью, стабильностью и селективностью, или даже для выполнения новых, не существующих в природе каталитических реакций.',
+                section4ListTitle: 'Ключевые подходы к разработке:',
+                section4Li1: 'Компьютерный дизайн модифицированных и химерных моделей ферментов.',
+                section4Li2: 'Платформы направленной эволюции для изучения функции и стабильности ферментов *in vitro* и *in vivo*.',
+                section4Li3: 'Системы *in vitro* для получения ферментов с расширенным аминокислотным составом.',
+                section4Li4: 'Инженерия ферментов для повышения стабильности и снижения побочных реакций.',
+                section5Title: 'Расширение биологического алфавита: Неприродные нуклеотиды',
+                section5Text: 'Сам генетический код расширяется. В 1989 году группа Стивена Беннера создала 6-буквенную ДНК (добавив нуклеотиды "P" и "Z"). В то время как 4-буквенная ДНК кодирует 20 аминокислот, эта 6-буквенная система теоретически может кодировать до 10 раз больше.',
+                section5ListTitle: 'Типы модификаций XNA:',
+                section5Box1: '(A) Модификации оснований',
+                section5Box2: '(B) Модификации сахаров',
+                section5Box3: '(C) Модификации фосфатов',
+                section6Title: 'Инструментарий инженера: Методы и рабочий процесс',
+                section6Text: 'Набор мощных техник позволяет точно и быстро инженировать геномы. Эти методы являются частью высокопроизводительного рабочего процесса, который индустриализировал процесс синтеза и сборки ДНК.',
+                section6List1Title: 'Передовые методы инженерии:',
+                section6Tech1Name: 'MAGE:',
+                section6Tech1Desc: ' Мультиплексное автоматизированное геномное инжиниринг для итеративной рекомбинации олигонуклеотидов.',
+                section6Tech2Name: 'ICE:',
+                section6Tech2Desc: ' *In vivo* непрерывная эволюция через обратную транскрипцию и реинтеграцию.',
+                section6Tech3Name: 'EvolvR:',
+                section6Tech3Desc: ' nCas9-слитая ДНК-полимераза для синтеза цепей с ошибками.',
+                section6Tech4Name: 'SCRaMbLE:',
+                section6Tech4Desc: ' Система рекомбинации, обеспечивающая огромное разнообразие фенотипов.',
+                section6List2Title: 'Рабочий процесс высокопроизводительной сборки ДНК:',
+                section6Flow1Title: '1. Программное проектирование',
+                section6Flow1Desc: 'Проектирование синтетических последовательностей и схем фрагментов.',
+                section6Flow2Title: '2. Синтез олигонуклеотидов',
+                section6Flow2Desc: 'Сборка из синтетических олигонуклеотидов методами LCR и ПЦР.',
+                section6Flow3Title: '3. Секвенирование и коррекция ошибок',
+                section6Flow3Desc: 'Классическое секвенирование по Сэнгеру и нанопоровые методы.',
+                section6Flow4Title: '4. Сборка фрагментов',
+                section6Flow4Desc: 'Сборка фрагментов от 1kb до 100kb+ в *E. coli* или дрожжах.',
+                section7Title: 'Следующий рубеж: BioAI',
+                section7Text: 'Сближение искусственного интеллекта и синтетической биологии создает "BioAI". ИИ может расшифровывать сложность жизни в масштабе, превосходящем человеческое познание, позволяя проектировать и предсказывать генные сети, белки и метаболические пути с беспрецедентной точностью.',
+                section7Box1Title: 'Синтетическая биология',
+                section7Box1Desc: 'Конструирует биологические системы',
+                section7Box2Title: 'Искусственный интеллект',
+                section7Box2Desc: 'Расшифровывает сложность',
+                section7Box3Title: 'BioAI',
+                section7Box3Desc: 'Интеллектуальная инженерия жизни',
+                section7Quote: '"Когда жизнь становится вычислимой, интеллект становится биологическим."',
+                section8Title: 'Философское измерение',
+                section8Text: 'Эта инженерная мощь заставляет человечество столкнуться с глубокими философскими вопросами о природе жизни и морали. Область объединяет биологию и нейронауку с философией для исследования, является ли наше чувство правильного и неправильного эволюционной адаптацией или рациональной конструкцией.',
+                section8ListTitle: 'Ключевые фигуры и вопросы:',
+                section8Li1: 'Является ли альтруизм формой изощренного эгоизма?',
+                section8Li2: 'Существует ли самоограничение в человеческой деструктивности?',
+                section8Fig1: 'Владимир Эфроимсон:',
+                section8Fig1Desc: ' Пионер генетических подходов к этике и поведению.',
+                section8Fig2: 'Иммануил Кант:',
+                section8Fig2Desc: ' Философ морального закона и категорического императива.',
+                section8Fig3: 'Марк Хаузер:',
+                section8Fig3Desc: ' Исследователь морального сознания как универсального, эволюционировавшего чувства.',
+                footerText1: 'Инфографика основана на "SYNTHETIC BIOLOGY — ENGLISH PRESENTATION SET".',
+                footerText2: 'Раиф Гаянович Василов — Национальный исследовательский центр "Курчатовский институт", Россия',
+                footerText3: '2 ноября 2025 г.'
+            },
+            'jp': {
+                mainTitle: '合成生物学：生命工学',
+                mainSubtitle: '古典生物学から工学分野への進化の分析、そのコア技術、基礎的なマイルストーン、そして哲学的フロンティアを探る。',
+                section1Title: '工学分野としての進化',
+                section1Text: '合成生物学は、自然界には見られないものを含む、定義された特性を持つ生物システムを設計・構築します。理論生物学（1970年代）や初期の遺伝子工学（1980〜90年代）として始まったものは、2010年の初の合成ゲノムのようなマイルストーンに牽引され、今や本格的な工学分野へと成熟しました。',
+                timeline1Title: '古典生物学 (1859–1955)',
+                timeline1Text: 'ダーウィン（進化論）、メンデル（遺伝の法則）、ワトソン＆クリック（DNA構造）、サンガー（初のタンパク質配列）。',
+                timeline2Title: '分子生物学 (1957–1992)',
+                timeline2Text: 'in vitro DNA合成、オペロンモデル、制限酵素、DNAシーケンシング、PCR、フラックスバランス理論。',
+                timeline3Title: '合成・ゲノム生物学 (1995–2019)',
+                timeline3Text: '初の細菌ゲノム、RNA-Seq & CRISPR、初の合成細胞 (2010)、最小合成細胞 (2016)、生物学が工学分野として認識される (2019)。',
+                section2Title: '最小細胞の探求',
+                section2Text: '合成生物学の主要な目標の一つは、「最小細胞」を構築することによって生命の基本的構成要素を理解することです。これには、生命に不可欠な遺伝子のみにゲノムを体系的に削減することが含まれます。',
+                chart1Title: 'JCVI-syn3.0: 最小ゲノム (2016)',
+                chart1Label1: '機能既知 (324)',
+                chart1Label2: '機能未知 (149)',
+                chart1Text: '2016年の最小細胞JCVI-syn3.0は473個の遺伝子を含んでいます。重要なことに、これらの遺伝子のうち149個（31%以上）は機能が未知のままであり、生命の基本的な操作について私たちがまだ学ぶべきことがいかに多いかを浮き彫りにしています。',
+                section3Title: 'ゲノム合成のマイルストーン',
+                section3Text: '最小細胞の創出は、初の完全合成ゲノムJCVI-syn1.0に始まる数十年にわたる研究の集大成でした。この15年、4000万ドルをかけたプロジェクトは、ゲノムがゼロから設計・構築できることを証明しました。',
+                chart2Title: 'ゲノム削減シリーズ (kbp)',
+                chart2Label1: 'M. mycoides (天然ドナー)',
+                chart2Label2: 'JCVI-syn2.0',
+                chart2Label3: 'JCVI-syn3.0 (最小)',
+                chart2DatasetLabel: 'ゲノムサイズ (kbp)',
+                chart2Text: 'このチャートは、天然のドナー *M. mycoides* (1083 kbp) から最小化されたJCVI-syn2.0 (576 kbp)、そしてその後の最小細胞JCVI-syn3.0 (531 kbp) へのゲノムサイズの大幅な削減を示しています。',
+                section4Title: '生物学的アルファベットの拡張：人工酵素',
+                section4Text: '生命を最小化するだけでなく、科学者たちはそのツールキットを積極的に拡張しています。非天然アミノ酸（nnAAs）を組み込むことで、酵素の活性、安定性、選択性を向上させたり、自然界にはない新しい触媒反応を行わせるように操作することができます。',
+                section4ListTitle: '主な開発アプローチ：',
+                section4Li1: '修飾・キメラ酵素モデルの計算設計。',
+                section4Li2: '*in vitro* および *in vivo* で酵素の機能と安定性を研究するための指向性進化プラットフォーム。',
+                section4Li3: '拡張されたアミノ酸組成を持つ酵素を得るための *in vitro* システム。',
+                section4Li4: '安定性を高め、副反応を減少させるための酵素工学。',
+                section5Title: '生物学的アルファベットの拡張：非天然ヌクレオチド',
+                section5Text: '遺伝コード自体が拡張されています。1989年、Steven Bennerのグループは（「P」と「Z」のヌクレオチドを加えて）6文字のDNAを作成しました。4文字のDNAが20種類のアミノ酸をコードするのに対し、この6文字のシステムは理論上、最大で10倍以上のアミノ酸をコードできる可能性があります。',
+                section5ListTitle: 'XNA修飾の種類：',
+                section5Box1: '(A) 塩基修飾',
+                section5Box2: '(B) 糖修飾',
+                section5Box3: '(C) リン酸修飾',
+                section6Title: 'エンジニアのツールキット：手法とワークフロー',
+                section6Text: '一連の強力な技術により、ゲノムの正確かつ迅速な操作が可能です。これらの手法は、DNA合成とアセンブリのプロセスを工業化したハイスループットワークフローの一部です。',
+                section6List1Title: '高度な工学技術：',
+                section6Tech1Name: 'MAGE:',
+                section6Tech1Desc: ' 繰り返しオリゴ組換えのためのマルチプレックス自動ゲノム工学。',
+                section6Tech2Name: 'ICE:',
+                section6Tech2Desc: ' 逆転写と染色体再統合による *in vivo* 連続進化。',
+                section6Tech3Name: 'EvolvR:',
+                section6Tech3Desc: ' エラープローン鎖合成を行うnCas9融合DNAポリメラーゼ。',
+                section6Tech4Name: 'SCRaMbLE:',
+                section6Tech4Desc: ' 広範な表現型の多様性を可能にする組換えシステム。',
+                section6List2Title: 'ハイスループットDNAアセンブリワークフロー：',
+                section6Flow1Title: '1. ソフトウェア設計',
+                section6Flow1Desc: '合成配列とフラグメント分割スキームの設計。',
+                section6Flow2Title: '2. オリゴヌクレオチド合成',
+                section6Flow2Desc: 'LCR法およびPCR法による合成オリゴからのアセンブリ。',
+                section6Flow3Title: '3. シーケンシングとエラー修正',
+                section6Flow3Desc: 'サンガー法およびナノポアハイスループット法。酵素的エラー修正。',
+                section6Flow4Title: '4. フラグメントアセンブリ',
+                section6Flow4Desc: '*E. coli* または *S. cerevisiae* 内での1kbから100kb+フラグメントのアセンブリ。',
+                section7Title: '次のフロンティア：BioAI',
+                section7Text: '人工知能と合成生物学の融合が「BioAI」を生み出しています。AIは人間の認知能力を超えるスケールで生命の複雑さを解読し、遺伝子ネットワーク、タンパク質、代謝経路の設計と予測を前例のない精度で可能にします。',
+                section7Box1Title: '合成生物学',
+                section7Box1Desc: '生物システムを構築する',
+                section7Box2Title: '人工知能',
+                section7Box2Desc: '複雑さを解読する',
+                section7Box3Title: 'BioAI',
+                section7Box3Desc: '生命の知的工学',
+                section7Quote: '「生命が計算可能になるとき、知性は生物学的になる」',
+                section8Title: '哲学的側面',
+                section8Text: 'この工学力は、人類に生命と道徳の性質についての深い哲学的問いを突きつけます。この分野は、生物学と神経科学を哲学と統合し、私たちの善悪の感覚が進化的な適応なのか、それとも合理的な構築物なのかを探求します。',
+                section8ListTitle: '主要な人物と問い：',
+                section8Li1: '利他主義は洗練された利己主義の一形態か？',
+                section8Li2: '人間の破壊性には自己制限が存在するか？',
+                section8Fig1: 'ウラジミール・エフロイムソン:',
+                section8Fig1Desc: ' 倫理と行動への遺伝学的アプローチのパイオニア。',
+                section8Fig2: 'イマヌエル・カント:',
+                section8Fig2Desc: ' 道徳法則と定言命法の哲学者。',
+                section8Fig3: 'マーク・ハウザー:',
+                section8Fig3Desc: ' 普遍的で進化した感覚としての道徳的心を探求した。',
+                footerText1: 'インフォグラフィックは「SYNTHETIC BIOLOGY — ENGLISH PRESENTATION SET」に基づいています。',
+                footerText2: 'ライーフ・ガヤノヴィッチ・ヴァシロフ — 国立研究センター「クルチャトフ研究所」、ロシア',
+                footerText3: '2025年11月2日'
+            }
+        };
+
+        let minimalCellChartInstance = null;
+        let genomeReductionChartInstance = null;
+        let currentLang = 'en';
+
+        const palette = {
+            navy: '#003366',
+            strongBlue: '#004E9A',
+            brightBlue: '#007BFF',
+            mediumBlue: '#4DA8FF',
+            lightBlue: '#B8DFFF',
+            text: '#003366'
+        };
+
+        Chart.defaults.color = palette.text;
+        Chart.defaults.font.family = 'Inter, sans-serif';
+        Chart.defaults.font.weight = '600';
+
+        function processLabel(label, maxLen = 16) {
+            if (typeof label !== 'string' || label.length <= maxLen) return label;
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).trim().length > maxLen) {
+                    if(currentLine.length > 0) lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if (currentLine) lines.push(currentLine);
+            return lines.length > 0 ? lines : [label];
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const sharedChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    backgroundColor: '#FFFFFF',
+                    titleColor: '#003366',
+                    bodyColor: '#004E9A',
+                    borderColor: '#B8DFFF',
+                    borderWidth: 1
+                }
+            }
+        };
+
+        function createCharts(lang) {
+            const langData = translations[lang];
+
+            if (minimalCellChartInstance) {
+                minimalCellChartInstance.destroy();
+            }
+            if (document.getElementById('minimalCellChart')) {
+                const ctx = document.getElementById('minimalCellChart').getContext('2d');
+                minimalCellChartInstance = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [langData.chart1Label1, langData.chart1Label2],
+                        datasets: [{
+                            data: [324, 149],
+                            backgroundColor: [
+                                palette.strongBlue,
+                                palette.mediumBlue
+                            ],
+                            borderColor: '#FFFFFF',
+                            borderWidth: 4
+                        }]
+                    },
+                    options: {
+                        ...sharedChartOptions,
+                        cutout: '70%',
+                    }
+                });
+            }
+
+            if (genomeReductionChartInstance) {
+                genomeReductionChartInstance.destroy();
+            }
+            if (document.getElementById('genomeReductionChart')) {
+                const ctx = document.getElementById('genomeReductionChart').getContext('2d');
+                genomeReductionChartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            langData.chart2Label1,
+                            langData.chart2Label2,
+                            langData.chart2Label3
+                        ].map(l => processLabel(l)),
+                        datasets: [{
+                            label: langData.chart2DatasetLabel,
+                            data: [1083, 576, 531],
+                            backgroundColor: [
+                                palette.mediumBlue,
+                                palette.strongBlue,
+                                palette.brightBlue
+                            ],
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        ...sharedChartOptions,
+                        indexAxis: 'y',
+                        plugins: {
+                            ...sharedChartOptions.plugins,
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    callback: (value) => value + (lang === 'jp' ? ' kbp' : ' kbp')
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function translatePage(lang) {
+            if (!translations[lang]) return;
+            currentLang = lang;
+            document.documentElement.lang = lang;
+
+            const langData = translations[lang];
+            
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (langData[key]) {
+                    element.innerText = langData[key];
+                }
+            });
+
+            document.querySelectorAll('#lang-switcher .lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                    btn.classList.remove('inactive');
+                } else {
+                    btn.classList.add('inactive');
+                    btn.classList.remove('active');
+                }
+            });
+
+            createCharts(lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createCharts(currentLang);
+
+            document.getElementById('lang-switcher').addEventListener('click', (e) => {
+                const targetButton = e.target.closest('.lang-btn');
+                if (targetButton) {
+                    const lang = targetButton.getAttribute('data-lang');
+                    if (lang && lang !== currentLang) {
+                        translatePage(lang);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
